@@ -50,7 +50,11 @@ dayjs.extend(utc);
 
       await Helpers.sleep(Conf.refresh_time_in_mins * 60 * 1000);
     } catch (error) {
-      console.error(error);
+      if (error.message) {
+        console.error("Error: ", error.message);
+      } else {
+        console.error("Error: ", error);
+      }
       console.info(
         `Application encountered an error, retrying in ${Constants.Retry_time_in_mins} min ...`
       );
