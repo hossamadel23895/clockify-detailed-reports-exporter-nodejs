@@ -1,4 +1,4 @@
-import * as Conf from "./Configuration.js";
+import * as Conf from "./Configurations.js";
 import * as Helpers from "./Helpers.js";
 import * as Requests from "./Requests.js";
 import * as Constants from "./Constants.js";
@@ -9,8 +9,11 @@ dayjs.extend(utc);
 
 // App entry
 (async () => {
+  console.info("---------------------------------------------------------");
+  console.info("Welcome to Clockify Detailed Reports Exporter Application");
   while (true) {
     try {
+      console.info("---------------------------------------------------------");
       let monthFirstDay = dayjs().utc().startOf("month");
       let monthLastDay = dayjs().utc().endOf("month");
       let dateRangeStart = Helpers.formatDateClockify(monthFirstDay);
@@ -29,7 +32,7 @@ dayjs.extend(utc);
       });
 
       console.info(
-        `Found ${filteredProjectsIds.length} Projects matching your configuration, Creating report...`
+        `Found ${filteredProjectsIds.length} Projects matching your configuration, Creating report ...`
       );
 
       let requestData = { ...Constants.Detailed_report_template };
@@ -38,7 +41,7 @@ dayjs.extend(utc);
       requestData.dateRangeEnd = dateRangeEnd;
       requestData.projects.ids = filteredProjectsIds;
 
-      console.info("Downloading Report, This can take a couple of mins ...");
+      console.info("Downloading Report, This can take a few minutes ...");
 
       let reportContent = await Requests.getDetailedReport(requestData);
 

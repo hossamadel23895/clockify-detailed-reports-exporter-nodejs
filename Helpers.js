@@ -1,7 +1,7 @@
 import { promises as promisesFs } from "fs";
 import fs from "fs";
 import path from "path";
-import * as Conf from "./Configuration.js";
+import * as Conf from "./Configurations.js";
 import * as Constants from "./Constants.js";
 
 export const createReportFile = async (name, content) => {
