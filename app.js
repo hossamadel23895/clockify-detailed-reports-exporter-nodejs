@@ -41,26 +41,24 @@ dayjs.extend(utc);
       requestData.dateRangeEnd = dateRangeEnd;
       requestData.projects.ids = filteredProjectsIds;
 
-      console.info("Downloading Report, This can take a few minutes ...");
+      Helpers.logMsg(`Downloading Report, This can take a few minutes ...`);
 
       let reportContent = await Requests.getDetailedReport(requestData);
 
       await Helpers.createReportFile(reportFileName, reportContent);
 
-      console.info(
+      Helpers.logMsg(
         `Report file was created successfully, Updating after ${Conf.refresh_time_in_mins} mins ...`
       );
 
       await Helpers.sleep(Conf.refresh_time_in_mins * 60 * 1000);
     } catch (error) {
-      if (error.message) {
-        console.error("Error: ", error.message);
-      } else {
-        console.error("Error: ", error);
-      }
-      console.info(
+      Helpers.logMsg(error);
+
+      Helpers.logMsg(
         `Application encountered an error, retrying in ${Constants.Retry_time_in_mins} min ...`
       );
+
       await Helpers.sleep(Constants.Retry_time_in_mins * 60 * 1000);
     }
   }
