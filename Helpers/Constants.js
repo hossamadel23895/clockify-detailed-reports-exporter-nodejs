@@ -2,7 +2,10 @@ export const Workspace_id = "5ee3d1d069855f3ad96367af";
 export const Base_endpoint = "https://api.clockify.me/api/v1";
 export const Reports_endpoint = "https://reports.api.clockify.me/v1";
 export const Retry_time_in_mins = 1;
-export const File_extension = "csv";
+export const Report_File_extension = "csv";
+export const Logs_files_path = ".\\logs";
+export const Logs_file_extension = "log";
+
 export const Detailed_report_template = {
   dateRangeStart: "",
   dateRangeEnd: "",

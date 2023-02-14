@@ -31,7 +31,7 @@ dayjs.extend(utc);
         filteredProjectsIds.push(project.id);
       });
 
-      console.info(
+      Helpers.logMsg(
         `Found ${filteredProjectsIds.length} Projects matching your configuration, Creating report ...`
       );
 

@@ -4,11 +4,15 @@ import path from "path";
 import * as Conf from "../Configurations.js";
 import * as Constants from "./Constants.js";
 
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+dayjs.extend(utc);
+
 export const createReportFile = async (name, content) => {
   let normalizedPath = path.normalize(Conf.report_file_path);
   if (fs.existsSync(normalizedPath)) {
     await promisesFs.writeFile(
-      `${normalizedPath}/${name}.${Constants.File_extension}`,
+      `${normalizedPath}/${name}.${Constants.Report_File_extension}`,
       content
     );
   } else {
@@ -37,4 +41,34 @@ export const createReportFileName = (dateObj) => {
   let year = dateObj.$y;
   let month = ("0" + (dateObj.$M + 1)).slice(-2);
   return `${year} ${month}`;
+};
+
+export const logMsg = async (msg) => {
+  // Pushing message to terminal
+  console.info(msg);
+
+  // Adding log line to logs
+  let normalizedPath = path.normalize(Constants.Logs_files_path);
+  if (fs.existsSync(normalizedPath)) {
+    fs.mkdirSync(normalizedPath);
+  }
+  await promisesFs.appendFile(
+    `${normalizedPath}/${createLogsFileName()}.${
+      Constants.Logs_file_extension
+    }`,
+    msg
+  );
+};
+
+export const createLogsFileName = () => {
+  let stampObj = dayjs().utc();
+  let year = stampObj.$y;
+  let month = ("0" + (stampObj.$M + 1)).slice(-2);
+  let day = ("0" + stampObj.$D).slice(-2);
+  return `${year}-${month}-${day}`;
+};
+
+export const addTimeStamp = () => {
+  let stampObj = dayjs().utc();
+  console.log(stampObj);
 };
