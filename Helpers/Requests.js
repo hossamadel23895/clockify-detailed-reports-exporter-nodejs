@@ -1,5 +1,5 @@
 import * as Constants from "./Constants.js";
-import * as Conf from "./Configurations.js";
+import * as Conf from "../Configurations.js";
 
 import axios from "axios";
 

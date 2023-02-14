@@ -1,7 +1,7 @@
 import * as Conf from "./Configurations.js";
-import * as Helpers from "./Helpers.js";
-import * as Requests from "./Requests.js";
-import * as Constants from "./Constants.js";
+import * as Helpers from "./Helpers/Helpers.js";
+import * as Requests from "./Helpers/Requests.js";
+import * as Constants from "./Helpers/Constants.js";
 
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
